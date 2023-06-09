@@ -1,4 +1,3 @@
-// Global variable to track if the submit button has been pressed
 let isSubmitPressed = false;
 // Function to perform the division and display the result
 function performDivision() {
@@ -27,16 +26,12 @@ function performDivision() {
 }
 // Function to handle the submit button click event
 function submitButtonClicked() {
-  // Set the flag to indicate that the submit button has been pressed
   isSubmitPressed = true;
-  // Perform the division
   performDivision();
 }
 // Function to initialize the program state
 function initializeProgramState() {
-  // Check if the submit button has not been pressed
-  if (!isSubmitPressed) {
-    // Display "NO calculation performed"
+  if (!isSubmitPressed) {    // Check if the submit button has not been pressed
     document.querySelector('[data-result]').innerHTML = 'NO calculation performed';
   }
 }
@@ -48,3 +43,5 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   submitButtonClicked()
 });
+
+
