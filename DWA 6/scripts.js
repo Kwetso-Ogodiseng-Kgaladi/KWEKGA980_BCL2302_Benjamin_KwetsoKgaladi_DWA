@@ -10,7 +10,7 @@ let page = 1; // Current page number
 let matches = books; // List of books that match the search filters
 
 /**
- * Creates a button element for a book.
+ * CDWAreates a button element for a book.
  * @param {Object} book - The book object.
  * @param {string} book.author - The author of the book.
  * @param {string} book.id - The ID of the book.
