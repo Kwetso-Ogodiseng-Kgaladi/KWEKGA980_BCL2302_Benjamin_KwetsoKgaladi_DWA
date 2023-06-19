@@ -36,11 +36,16 @@ const selectors = {
  * @param {*} book
  * @returns
  */
-    function createBookPreview(book) {
+
+function bookFactory () {
+  function createBookPreview(book) {
+
     const { author, id, image, title }  = book;
+
     const element = document.createElement('button')
     element.classList = 'preview'
     element.setAttribute('data-preview', id)
+
     element.innerHTML = `
         <img
             class="preview__image"
@@ -52,39 +57,76 @@ const selectors = {
         </div>
     `
     return(element);
+  }
+
+  
+function filters(){
+
+
+    
+  /**
+   * Function to create an option element for a dropdown
+   * @param {*} value - The value of the option
+   * @param {*} text - The text content of the option
+   * @returns {Element} - The created option element
+   */
+
+  function createOptionElement(value, text){
+    const element = document.createElement('option');
+
+    element.value = value;
+    element.innerText = text;
+
+    return element ;
+  }
+
+  // Creating option elements for genres and authors dropdowns
+  const genreHtml = document.createDocumentFragment();
+  const authorsHtml = document.createDocumentFragment();
+
+  genreHtml.appendChild(createOptionElement('any', 'All Genres'))
+  authorsHtml.appendChild(createOptionElement('any','All Authors'))
+
+  for (const [id, name] of Object.entries(genres)) {
+      genreHtml.appendChild(createOptionElement(id, name))
+
+  }
+
+  for (const [id, name] of Object.entries(authors)) {
+      authorsHtml.appendChild(createOptionElement(id, name))
+      
+  }
+
+  const selectGenre = selectors.searchGenres.appendChild(genreHtml)
+  const selectAuthors =selectors.searchAuthors.appendChild(authorsHtml)
+
+  return {
+    selectAuthors,
+    selectGenre
+  }
+  
 }
+
+
+    return {
+      createBookPreview, filters
+    }
+}
+
+const factoryBook = bookFactory()
+
 // Creating initial book previews and appending them to the list
 const starting = document.createDocumentFragment()
+
 for (const book of matches.slice(0, BOOKS_PER_PAGE)){
-    const previewElement =createBookPreview(book);
+    const previewElement = factoryBook.createBookPreview(book);
     starting.appendChild(previewElement);
+    
 }
+
 selectors.listItems.appendChild(starting)
-/**
- * Function to create an option element for a dropdown
- * @param {*} value - The value of the option
- * @param {*} text - The text content of the option
- * @returns {Element} - The created option element
- */
-function createOptionElement(value, text){
-const element = document.createElement('option');
-element.value = value;
-element.innerText = text;
-return element ;
-}
-// Creating option elements fo rgenres and authors dropdowns
-const genreHtml = document.createDocumentFragment();
-const authorsHtml = document.createDocumentFragment();
-genreHtml.appendChild(createOptionElement('any', 'All Genres'))
-authorsHtml.appendChild(createOptionElement('any','All Authors'))
-for (const [id, name] of Object.entries(genres)) {
-    genreHtml.appendChild(createOptionElement(id, name))
-}
-for (const [id, name] of Object.entries(authors)) {
-    authorsHtml.appendChild(createOptionElement(id, name))
-}
-selectors.searchGenres.appendChild(genreHtml)
-selectors.searchAuthors.appendChild(authorsHtml)
+factoryBook.filters()
+
 // Checking the user's preferred color scheme and setting the theme
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     selectors.settingsTheme.value = 'night'
@@ -205,7 +247,7 @@ function clearListItems() {
 function createBookPreviews(books) {
   const fragment = document.createDocumentFragment();
   for (const book of books) {
-    const previewElement = createBookPreview(book);
+    const previewElement = factoryBook.createBookPreview(book);
     fragment.appendChild(previewElement);
   }
   return fragment;
@@ -241,7 +283,7 @@ selectors.listButton.addEventListener('click', handleListButtonClicked);
 selectors.listButton.addEventListener('click', () => {
     const fragment = document.createDocumentFragment()
     for ( const book of matches.slice(page * BOOKS_PER_PAGE, (page + 1) * BOOKS_PER_PAGE)) {
-        const previewElement2 = createBookPreview(book)
+        const previewElement2 = factoryBook.createBookPreview(book)
         fragment.appendChild(previewElement2)
     }
     selectors.listItems.appendChild(fragment)
@@ -272,3 +314,8 @@ selectors.listItems.addEventListener('click', (event) => {
         selectors.listDescription.innerText = active.description
     }
 })
+
+
+
+
+
