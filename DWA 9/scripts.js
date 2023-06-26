@@ -1,5 +1,7 @@
 // importing data and constants from 'data.js' file
 import { books, authors, genres, BOOKS_PER_PAGE } from './data.js'
+import { createOptionElement, createBookPreviews } from './modules/helpers.js';
+
 // Variables to track the current page and matching books
 let page = 1;
 let matches = books
@@ -51,6 +53,8 @@ function bookFactory () {
             class="preview__image"
             src="${image}"
         />
+
+        
         <div class="preview__info">
             <h3 class="preview__title">${title}</h3>
             <div class="preview__author">${authors[author]}</div>
@@ -71,14 +75,14 @@ function filters(){
    * @returns {Element} - The created option element
    */
 
-  function createOptionElement(value, text){
-    const element = document.createElement('option');
+  // function createOptionElement(value, text){
+  //   const element = document.createElement('option');
 
-    element.value = value;
-    element.innerText = text;
+  //   element.value = value;
+  //   element.innerText = text;
 
-    return element ;
-  }
+  //   return element ;
+  // }
 
   // Creating option elements for genres and authors dropdowns
   const genreHtml = document.createDocumentFragment();
@@ -206,28 +210,7 @@ function handleListButtonClicked() {
   appendItemsToList(previewElements);
   page += 1;
 }
-/**
- * Function to filter books
- * @param {*} filters
- * @returns
- */
-function filterBooks(filters) {
-  return books.filter((book) => {
-    let genreMatch = filters.genre === 'any';
-    for (const singleGenre of book.genres) {
-      if (genreMatch) break;
-      if (singleGenre === filters.genre) {
-        genreMatch = true;
-      }
-    }
-    return (
-      (filters.title.trim() === '' ||
-        book.title.toLowerCase().includes(filters.title.toLowerCase())) &&
-      (filters.author === 'any' || book.author === filters.author) &&
-      genreMatch
-    );
-  });
-}
+
 /**
  * Function to toggle the display of the list message based on the number of matches
  * @param {*} show
@@ -244,14 +227,14 @@ function clearListItems() {
  * @param {*} books
  * @returns {fragment}
  */
-function createBookPreviews(books) {
-  const fragment = document.createDocumentFragment();
-  for (const book of books) {
-    const previewElement = factoryBook.createBookPreview(book);
-    fragment.appendChild(previewElement);
-  }
-  return fragment;
-}
+// function createBookPreviews(books) {
+//   const fragment = document.createDocumentFragment();
+//   for (const book of books) {
+//     const previewElement = factoryBook.createBookPreview(book);
+//     fragment.appendChild(previewElement);
+//   }
+//   return fragment;
+// }
 /**
  * Function to append items to the list
  * @param {*} items
