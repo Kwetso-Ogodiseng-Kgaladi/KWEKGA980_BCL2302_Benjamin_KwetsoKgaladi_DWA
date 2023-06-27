@@ -43,20 +43,45 @@ const resetHandler = () => {
     
   };
 
-
-
 subtract.addEventListener('click',subtractHandler);
 add.addEventListener('click', addHandler);
 reset.addEventListener('click', resetHandler)
 
-console.log(getState()); 
+// console.log(getState()); 
 
-dispatch({ type: 'ADD' });
-dispatch({ type: 'ADD' });
-console.log(getState());
+// dispatch({ type: 'ADD' });
+// dispatch({ type: 'ADD' });
+// console.log(getState());
 
- dispatch({ type: 'SUBTRACT' });
- console.log(getState());
+//  dispatch({ type: 'SUBTRACT' });
+//  console.log(getState());
 
-dispatch({ type: 'RESET' });
- console.log(getState());
+// dispatch({ type: 'RESET' });
+//  console.log(getState());
+
+
+// Event listener for the "ADD" button
+add.addEventListener('click', () => {
+    dispatch({ type: 'ADD' });
+    displayCount();
+  });
+  
+  // Event listener for the "SUBTRACT" button
+  subtract.addEventListener('click', () => {
+    dispatch({ type: 'SUBTRACT' });
+    displayCount();
+  });
+  
+  // Event listener for the "RESET" button
+  reset.addEventListener('click', () => {
+    dispatch({ type: 'RESET' });
+    displayCount();
+  });
+  
+  // Function to display the count
+  function displayCount() {
+    console.log(getState().count);
+  }
+  
+  // Initial display
+  displayCount();
