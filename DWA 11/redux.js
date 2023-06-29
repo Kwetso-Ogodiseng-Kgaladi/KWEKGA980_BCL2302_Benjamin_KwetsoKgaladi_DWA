@@ -27,14 +27,15 @@ const reducer = (currentState, action) => {
   }
 };
 
-// Dispatch function to trigger state updates
+//Dispatch function to trigger state updates
 const dispatch = (action) => {
   state = reducer(state, action);
 };
 
-// Selector function to retrieve the current state
+//Selector function to retrieve the current state
 const getState = () => {
   return state;
 };
 
 export { dispatch, getState };
+
