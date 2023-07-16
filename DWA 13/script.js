@@ -6,32 +6,15 @@ names.forEach((name, index) => {
     console.log(`${name} (${province})`);
   });
 
-  const uppercaseProvinces = provinces.map(province => province.toUpperCase());
-
-console.log(uppercaseProvinces);
-
+const uppercaseProvinces = provinces.map(province => province.toUpperCase());
 const characterCount = names.map(name => name.length);
-
-console.log(characterCount);
-
 const sortedProvinces = provinces.sort();
-
-console.log(sortedProvinces);
-
 const filteredProvinces = provinces.filter(province => !province.includes('Cape'));
-
 const remainingProvincesCount = filteredProvinces.length;
-
-console.log(remainingProvincesCount);
-
 const containsSArray = names.map(name => name.includes('S'));
-
-console.log(containsSArray);
-
-
 const provinceObject = containsSArray.reduce((obj, value, index) => {
     obj[names[index]] = value ? provinces[index] : 'No Province';
     return obj;
   }, {});
   
-  console.log(provinceObject);
+  console.log(uppercaseProvinces,characterCount,sortedProvinces,remainingProvincesCount,containsSArray,provinceObject);
