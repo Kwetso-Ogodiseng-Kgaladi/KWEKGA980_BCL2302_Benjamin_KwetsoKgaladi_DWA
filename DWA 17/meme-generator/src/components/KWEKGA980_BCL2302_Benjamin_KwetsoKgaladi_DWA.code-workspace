@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "KWEKGA980_BCL2302_Benjamin_KwetsoKgaladi_DWA",
+			"path": "../../../.."
+		},
+		{
+			"name": "diporojeke",
+			"path": "../../../../../../../../diporojeke"
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5502,
+		"liveServer.settings.multiRootWorkspaceName": "KWEKGA980_BCL2302_Benjamin_KwetsoKgaladi_DWA"
+	}
+}
